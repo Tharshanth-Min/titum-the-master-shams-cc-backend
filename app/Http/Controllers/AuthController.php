@@ -1,5 +1,5 @@
 <?php
-
+//php artisan db:seed --class="UsersTableSeeder"
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class AuthController extends Controller {
     public function login(Request $request) {
 
         $validator = Validator::make($request->all(), [
-            'user_name' => 'required',
+            'userName' => 'required',
             'password' => 'required',
         ]);
 
@@ -25,7 +25,7 @@ class AuthController extends Controller {
             ], 422);
         }
 
-        $credentials = ['user_name' => $request->user_name, 'password' => $request->password, 'is_active' => 1];
+        $credentials = ['user_name' => $request->userName, 'password' => $request->password, 'is_active' => 1];
 
         if (! $token = auth()->attempt($credentials)) {
             return response()->json([

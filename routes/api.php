@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::group([
+    'prefix' => 'v1'
+], function ($router) {
+    Route::post('auth/login', [AuthController::class, 'login']);
+});
 
 Route::prefix('v1')->middleware(['auth:api','scope:admin,moderator,user', 'role'])->group(function () {
     
